@@ -1,0 +1,42 @@
+# wmt14_en_de.yaml
+save_data: data/wmt_en_de/
+## Where the vocab(s) will be written
+src_vocab: data/wmt_en_de/vocab.src
+tgt_vocab: data/wmt_en_de/vocab.tgt
+
+# Corpus opts:
+data:
+    commoncrawl:
+        path_src: data/wmt_en_de/commoncrawl.de-en.en
+        path_tgt: data/wmt_en_de/commoncrawl.de-en.de
+        transforms: [sentencepiece, filtertoolong]
+        weight: 23
+    europarl:
+        path_src: data/wmt_en_de/europarl-v7.de-en.en
+        path_tgt: data/wmt_en_de/europarl-v7.de-en.de
+        transforms: [sentencepiece, filtertoolong]
+        weight: 19
+    news_commentary:
+        path_src: data/wmt_en_de/news-commentary-v11.de-en.en
+        path_tgt: data/wmt_en_de/news-commentary-v11.de-en.de
+        transforms: [sentencepiece, filtertoolong]
+        weight: 3
+    valid:
+        path_src: data/wmt_en_de/valid.en
+        path_tgt: data/wmt_en_de/valid.de
+        transforms: [sentencepiece]
+
+### Transform related opts:
+#### Subword
+src_subword_model: checkpoints/en_de/sentencepiece.model
+tgt_subword_model: checkpoints/en_de/sentencepiece.model
+src_subword_nbest: 1
+src_subword_alpha: 0.0
+tgt_subword_nbest: 1
+tgt_subword_alpha: 0.0
+#### Filter
+src_seq_length: 150
+tgt_seq_length: 150
+
+# silently ignore empty lines in the data
+skip_empty_level: silent

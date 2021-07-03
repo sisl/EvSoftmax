@@ -1,0 +1,10 @@
+model: /scratch/$USER/checkpoints/de_en/iwslt-brnn2.s131_acc_62.71_ppl_7.74_e20.pt
+src: data/iwslt14.tokenized.de-en/test.de
+tgt: data/iwslt14.tokenized.de-en/test.en
+output: preds/de_en/softmax.txt
+replace_unk: 'true'
+verbose: 'true'
+gpu: 0
+log_file: logs/softmax_test_de_en_untok
+# attn_out: results/attn_out/softmax_de_en.pt
+# beam_score_out: results/beam_score_out/softmax_de_en.pt

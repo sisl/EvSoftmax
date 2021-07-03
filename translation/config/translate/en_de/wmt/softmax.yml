@@ -1,0 +1,10 @@
+model: /scratch/$USER/checkpoints/en_de/softmax_step_16000.pt
+src: data/wmt_en_de/test_sp.en
+tgt: data/wmt_en_de/test_sp.de
+output: preds/en_de/softmax_sp.txt
+replace_unk: 'true'
+verbose: 'true'
+gpu: 0
+log_file: logs/softmax_test_en_de
+# attn_out: results/attn_out/softmax_de_en.pt
+# beam_score_out: results/beam_score_out/softmax_de_en.pt

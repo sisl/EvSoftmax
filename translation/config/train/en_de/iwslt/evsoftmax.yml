@@ -1,0 +1,102 @@
+# wmt14_en_de.yaml
+save_data: data/wmt_en_de/run/example
+tensorboard: true
+
+# Corpus opts:
+data:
+    train:
+        path_src: data/iwslt14.tokenized.de-en/train.en
+        path_tgt: data/iwslt14.tokenized.de-en/train.de
+        transforms: [sentencepiece, filtertoolong]
+        weight: 1
+    valid:
+        path_src: data/iwslt14.tokenized.de-en/valid.en
+        path_tgt: data/iwslt14.tokenized.de-en/valid.de
+        transforms: [sentencepiece]
+
+### Transform related opts:
+#### Subword
+src_subword_model: /scratch/$USER/checkpoints/en_de/sentencepiece.model
+tgt_subword_model: /scratch/$USER/checkpoints/en_de/sentencepiece.model
+# src_subword_type: sentencepiece
+# tgt_subword_type: sentencepiece
+# onmttok_kwargs: "{'mode': 'none', 'spacer_annotate': True}"
+
+subword_nbest: 1
+subword_alpha: 0.0
+#### Filter
+src_seq_length: 150
+tgt_seq_length: 150
+
+# silently ignore empty lines in the data
+skip_empty_level: silent
+
+
+# # Vocab opts
+# ### vocab:
+src_vocab: data/iwslt14.tokenized.de-en/vocab_sp.src
+tgt_vocab: data/iwslt14.tokenized.de-en/vocab_sp.tgt
+src_vocab_size: 32000
+tgt_vocab_size: 32000
+vocab_size_multiple: 8
+src_words_min_frequency: 1
+tgt_words_min_frequency: 1
+share_vocab: True
+
+# # Model training parameters
+
+# General opts
+save_model: /scratch/$USER/checkpoints/en_de/iwslt_evsoftmax_lr_0p5
+train_from: /scratch/$USER/checkpoints/en_de/pretrained_en_de_transformer.pt
+keep_checkpoint: 20
+save_checkpoint_steps: 1000
+average_decay: 0.0005
+# seed: 1234
+report_every: 100
+train_steps: 40000
+valid_steps: 1000
+
+# Batching
+queue_size: 256
+bucket_size: 8192
+pool_factor: 2048
+world_size: 1
+gpu_ranks: [0]
+batch_type: "tokens"
+batch_size: 1024
+valid_batch_size: 16
+batch_size_multiple: 1
+max_generator_batches: 0
+accum_count: [3]
+accum_steps: [0]
+
+# Optimization
+model_dtype: "fp32"
+optim: "adam"
+learning_rate: 0.5
+warmup_steps: 5000
+decay_method: "noam"
+adam_beta2: 0.998
+max_grad_norm: 0
+label_smoothing: 0.1
+param_init: 0
+param_init_glorot: true
+normalization: "tokens"
+
+# Model
+encoder_type: transformer
+decoder_type: transformer
+enc_layers: 6
+dec_layers: 6
+heads: 8
+rnn_size: 512
+word_vec_size: 512
+transformer_ff: 2048
+dropout_steps: [0]
+dropout: [0.1]
+attention_dropout: [0.1]
+share_decoder_embeddings: true
+share_embeddings: true
+position_encoding: true
+self_attn_function: evsoftmax
+generator_function: evsoftmax

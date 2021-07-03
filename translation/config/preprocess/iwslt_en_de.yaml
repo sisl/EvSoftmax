@@ -1,0 +1,32 @@
+# wmt14_en_de.yaml
+save_data: data/iwslt14.tokenized.de-en/
+## Where the vocab(s) will be written
+src_vocab: data/iwslt14.tokenized.de-en/vocab_sp.src
+tgt_vocab: data/iwslt14.tokenized.de-en/vocab_sp.tgt
+
+# Corpus opts:
+data:
+    train:
+        path_src: data/iwslt14.tokenized.de-en/train.en
+        path_tgt: data/iwslt14.tokenized.de-en/train.de
+        transforms: [sentencepiece, filtertoolong]
+        weight: 1
+    valid:
+        path_src: data/iwslt14.tokenized.de-en/valid.en
+        path_tgt: data/iwslt14.tokenized.de-en/valid.de
+        transforms: [sentencepiece]
+
+### Transform related opts:
+#### Subword
+src_subword_model: /scratch/$USER/checkpoints/en_de/sentencepiece.model
+tgt_subword_model: /scratch/$USER/checkpoints/en_de/sentencepiece.model
+src_subword_nbest: 1
+src_subword_alpha: 0.0
+tgt_subword_nbest: 1
+tgt_subword_alpha: 0.0
+#### Filter
+src_seq_length: 150
+tgt_seq_length: 150
+
+# silently ignore empty lines in the data
+skip_empty_level: silent

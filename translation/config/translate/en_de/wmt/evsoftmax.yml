@@ -1,0 +1,10 @@
+model: /scratch/$USER/checkpoints/en_de/evsoftmax_base_lr_2p0_step_100000.pt
+src: data/wmt_en_de/test_sp.en
+tgt: data/wmt_en_de/test_sp.de
+output: preds/en_de/evsoftmax_sp.txt
+replace_unk: 'true'
+verbose: 'true'
+gpu: 0
+log_file: logs/evsoftmax_test_en_de
+# attn_out: results/attn_out/evsoftmax_de_en.pt
+# beam_score_out: results/beam_score_out/evsoftmax_de_en.pt

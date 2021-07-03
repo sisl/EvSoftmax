@@ -1,0 +1,10 @@
+model: /scratch/$USER/checkpoints/en_de/iwslt_sparsemax_lr_0p5_step_40000.pt
+src: data/iwslt14.tokenized.de-en/test_sp.en
+tgt: data/iwslt14.tokenized.de-en/test_sp.de
+output: preds/en_de/iwslt/sparsemax_sp.txt
+replace_unk: 'true'
+verbose: 'true'
+gpu: 0
+log_file: logs/iwslt_en_de/sparsemax_test
+attn_out: preds/en_de/iwslt/attn_out/sparsemax_de_en.pt
+# beam_score_out: results/beam_score_out/evsparsemax_de_en.pt
